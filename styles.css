@@ -154,6 +154,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   letter-spacing: 0.02em;
 }
 .logo-sub{
+  display: block;
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.1em;
