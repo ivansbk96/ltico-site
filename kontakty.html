@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<script>document.documentElement.classList.add('js');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Контакты и заявка на перевозку — LTICO</title>
+<meta name="description" content="Свяжитесь с LTICO по телефону, email или оставьте заявку на перевозку груза по России, Казахстану и Беларуси.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="index.html">
+      <img class="logo-mark" src="logo.png" alt="LTI" height="30" style="width:auto; display:block;">
+      <span>
+        <span class="logo-word">LTICO</span>
+        <span class="logo-sub">логистика транспортных инноваций</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Основная навигация">
+      <a href="index.html#uslugi">Услуги</a>
+      <a href="gabaritnye-gruzy.html">Негабарит</a>
+      <a href="index.html#o-kompanii">О компании</a>
+      <a href="kontakty.html" aria-current="page">Контакты</a>
+    </nav>
+    <div class="header-contacts">
+      <a href="tel:+74997146692">+7 (499) 714-66-92</a>
+      <a href="https://wa.me/79918540125" target="_blank" rel="noopener" style="font-size:12px; color:var(--steel-light);">WhatsApp</a>
+      <span>ежедневно / круглосуточно</span>
+    </div>
+  </div>
+</header>
+
+<div class="page-head">
+  <div class="container">
+    <p class="breadcrumb"><a href="index.html">Главная</a> / Контакты</p>
+    <h1>Контакты и заявка</h1>
+    <p class="lead">Оставьте параметры груза в форме — рассчитаем маршрут и перезвоним, либо свяжитесь напрямую по телефону или email.</p>
+  </div>
+</div>
+
+<section class="bg-ink" id="form">
+  <div class="container two-col">
+    <div>
+      <div class="section-head reveal" style="margin-bottom:30px;">
+        <p class="eyebrow">Заявка</p>
+        <h2 style="margin-top:14px;">Опишите груз</h2>
+      </div>
+
+      <!--
+        Форма отправляет данные через Web3Forms (web3forms.com) — бесплатный сервис приёма заявок без бэкенда.
+        Перед публикацией: зарегистрируйтесь на web3forms.com, получите Access Key
+        и замените значение YOUR_ACCESS_KEY_HERE ниже на свой ключ.
+      -->
+      <form class="form-grid" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+        <input type="hidden" name="subject" value="Новая заявка с сайта LTICO">
+
+        <div class="field">
+          <label for="name">Имя</label>
+          <input id="name" name="name" type="text" placeholder="Как к вам обращаться" required>
+        </div>
+        <div class="field">
+          <label for="phone">Телефон</label>
+          <input id="phone" name="phone" type="tel" placeholder="+7 ___ ___-__-__" required>
+        </div>
+        <div class="field">
+          <label for="route">Маршрут</label>
+          <input id="route" name="route" type="text" placeholder="Откуда — куда">
+        </div>
+        <div class="field">
+          <label for="weight">Вес и габариты груза</label>
+          <input id="weight" name="weight" type="text" placeholder="Например, 12 т / 14×3×3,5 м">
+        </div>
+        <div class="field full">
+          <label for="message">Комментарий</label>
+          <textarea id="message" name="message" rows="4" placeholder="Тип груза, сроки, особые условия"></textarea>
+        </div>
+        <div class="field full">
+          <label class="field-consent" style="display:flex; align-items:flex-start; gap:10px; text-transform:none;">
+            <input type="checkbox" required style="margin-top:3px;">
+            <span>Согласен(а) на обработку персональных данных в соответствии с <a href="privacy.html">Политикой конфиденциальности</a></span>
+          </label>
+        </div>
+        <div class="field full">
+          <button type="submit" class="btn btn-solid">Отправить заявку</button>
+        </div>
+      </form>
+    </div>
+
+    <aside>
+      <div class="section-head reveal" style="margin-bottom:30px;">
+        <p class="eyebrow">Прямая связь</p>
+        <h2 style="margin-top:14px; font-size:28px;">Телефон и почта</h2>
+      </div>
+      <table class="spec-table" style="color:var(--line-white);">
+        <tr style="border-color:var(--rule-light)"><td style="color:var(--steel-light)">Телефон</td><td><a href="tel:+74997146692">+7 (499) 714-66-92</a></td></tr>
+        <tr style="border-color:var(--rule-light)"><td style="color:var(--steel-light)">Доп. номер</td><td><a href="tel:+79918540125">+7 (991) 854-01-25</a></td></tr>
+        <tr style="border-color:var(--rule-light)"><td style="color:var(--steel-light)">Доп. номер</td><td><a href="tel:+79918540126">+7 (991) 854-01-26</a></td></tr>
+        <tr style="border-color:var(--rule-light)"><td style="color:var(--steel-light)">Email</td><td><a href="mailto:info@ltico.ru">info@ltico.ru</a></td></tr>
+        <tr style="border-color:var(--rule-light)"><td style="color:var(--steel-light)">WhatsApp</td><td><a href="https://wa.me/79918540125" target="_blank" rel="noopener">Написать в WhatsApp</a></td></tr>
+        <tr style="border-color:var(--rule-light)"><td style="color:var(--steel-light)">Режим работы</td><td>Ежедневно, круглосуточно</td></tr>
+        <tr style="border-color:var(--rule-light)"><td style="color:var(--steel-light)">Адрес</td><td>Москва, ул. Адмирала Руднева, д. 4</td></tr>
+      </table>
+    </aside>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h5>LTICO</h5>
+        <p>ООО «Логистика транспортных инноваций»<br>ИНН 9729375445 · ОГРН 1247700340293</p>
+        <p>117041, Москва, вн. тер. г. муниципальный округ Южное Бутово, ул. Адмирала Руднева, д. 4, помещ. 30Н/6</p>
+      </div>
+      <div>
+        <h5>Услуги</h5>
+        <ul>
+          <li><a href="gabaritnye-gruzy.html">Габарит и негабарит</a></li>
+          <li><a href="index.html#uslugi">Опасные грузы ADR</a></li>
+          <li><a href="index.html#uslugi">Спецтехника</a></li>
+          <li><a href="index.html#uslugi">Месторождения</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Компания</h5>
+        <ul>
+          <li><a href="index.html#o-kompanii">О компании</a></li>
+          <li><a href="dokumenty-i-dopuski.html">Документы и допуски</a></li>
+          <li><a href="glossary.html">Глоссарий</a></li>
+          <li><a href="kontakty.html">Контакты</a></li>
+          <li><a href="privacy.html">Политика конфиденциальности</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Связаться</h5>
+        <ul>
+          <li><a href="tel:+74997146692">+7 (499) 714-66-92</a></li>
+          <li><a href="tel:+79918540125">+7 (991) 854-01-25</a></li>
+          <li><a href="mailto:info@ltico.ru">info@ltico.ru</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 LTICO — Логистика транспортных инноваций</span>
+      <span>Черновая версия сайта · в разработке</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  if(!('IntersectionObserver' in window)){
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15, rootMargin:"0px 0px -60px 0px"});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
