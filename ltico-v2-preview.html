@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LTICO — логистика и аренда строительной техники по РФ, Казахстану и Беларуси</title>
+<meta name="description" content="ООО «Логистика транспортных инноваций» (LTICO): грузоперевозки (газели, фуры, тралы, негабарит) и аренда спецтехники с оператором — экскаваторы, краны, автовышки, самосвалы, дорожно-коммунальная техника.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   site.css — стили новой концепции LTICO (главная + каталог)
+   Палитра из логотипа LTI. Отдельный файл, чтобы не конфликтовать
+   с существующим styles.css старых страниц.
+   ========================================================================== */
+:root{
+  --ink:#2E3B47; --ink-2:#37475A; --blueprint:#3E5066;
+  --paper:#F8F7F3; --paper-2:#ECE9E1; --line:#FAFAF8;
+  --signal:#C2825A; --signal-d:#A3673F; --peri:#8FA0C9; --stone:#76746E;
+  --steel:#69707A; --steel-l:#ACB3BC; --rule:rgba(46,59,71,0.12);
+  --container:1120px;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+body{margin:0;font-family:"Inter",sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.6;}
+h1,h2,h3{font-family:"Manrope",sans-serif;font-weight:800;margin:0;letter-spacing:-0.01em;}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 22px;}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--signal);}
+a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;}
+
+/* ---------- header + burger ---------- */
+.hdr{position:sticky;top:0;z-index:50;background:var(--ink);color:var(--line);}
+.hdr-in{max-width:var(--container);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:13px 22px;}
+.hdr-left{display:flex;align-items:center;gap:16px;}
+.burger{background:none;border:none;color:var(--signal);cursor:pointer;display:flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:13px;text-transform:uppercase;letter-spacing:.05em;padding:0;}
+.burger svg{display:block;}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--line);}
+.logo img{height:26px;width:auto;}
+.logo-word{font-family:"Manrope",sans-serif;font-size:20px;font-weight:800;letter-spacing:.02em;}
+.hdr-phone{font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--line);text-decoration:none;}
+.mega{display:none;background:var(--ink-2);border-top:1px solid rgba(250,250,248,0.12);}
+.mega.open{display:block;}
+.mega-in{max-width:var(--container);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(250,250,248,0.1);}
+.mega-col{background:var(--ink-2);padding:22px 24px;}
+.mega-col .cap{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;}
+.mega-col a{display:block;color:#DDE1E8;text-decoration:none;font-size:14px;padding:8px 0;border-bottom:1px solid rgba(250,250,248,0.06);}
+.mega-col a:hover{color:var(--line);}
+.mega-links{grid-column:1/-1;background:var(--ink-2);display:flex;border-top:1px solid rgba(250,250,248,0.1);}
+.mega-links a{flex:1;text-align:center;color:var(--steel-l);text-decoration:none;font-size:13px;padding:13px;border-right:1px solid rgba(250,250,248,0.08);}
+.mega-links a:last-child{border-right:none;}
+.mega-links a:hover{color:var(--line);}
+
+/* ---------- intro ---------- */
+.intro{background:var(--blueprint);color:var(--line);padding:44px 0 34px;}
+.intro h1{font-size:clamp(26px,4vw,42px);margin-top:12px;max-width:16ch;}
+.intro .lead{color:var(--steel-l);font-size:16px;line-height:1.7;max-width:54ch;margin-top:14px;}
+.stats{display:flex;border-top:1px solid rgba(250,250,248,0.12);border-bottom:1px solid rgba(250,250,248,0.12);margin-top:26px;}
+.stat{flex:1;padding:16px 0;border-right:1px solid rgba(250,250,248,0.1);}
+.stat:last-child{border-right:none;}
+.stat b{display:block;font-family:"Manrope",sans-serif;font-size:22px;font-weight:800;}
+.stat span{font-size:12px;color:#888780;}
+.dirs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px;}
+.dir{background:var(--ink-2);border-radius:12px;padding:22px;text-decoration:none;color:var(--line);border-left:3px solid var(--peri);}
+.dir.special{border-left-color:var(--signal);}
+.dir .dh{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.dir .dh b{font-size:18px;font-weight:500;font-family:"Inter",sans-serif;}
+.dir p{color:var(--steel-l);font-size:13.5px;line-height:1.6;margin:0;}
+.dir .go{color:var(--peri);font-size:13px;margin-top:14px;font-weight:600;}
+.dir.special .go{color:var(--signal);}
+
+/* ---------- catalog ---------- */
+.cat{padding:34px 0 54px;}
+.cat h2{font-size:26px;}
+.cat .sub{color:var(--steel);font-size:14px;margin-top:6px;}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 24px;}
+.filters button{font-family:"IBM Plex Mono",monospace;font-size:12px;padding:8px 14px;border-radius:20px;border:none;cursor:pointer;background:var(--paper-2);color:var(--steel);transition:background .15s,color .15s;}
+.filters button.on{background:var(--ink);color:var(--line);}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+.card{background:#fff;border:0.5px solid #E0DDD4;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
+.card .ph{height:130px;background:var(--paper-2);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.card .ph img{width:100%;height:100%;object-fit:cover;}
+.card .bd{padding:16px;display:flex;flex-direction:column;flex-grow:1;}
+.card .tag{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--signal);text-transform:uppercase;letter-spacing:.04em;}
+.card h3{font-size:16px;font-weight:700;font-family:"Inter",sans-serif;margin:6px 0;}
+.card .sp{font-size:12.5px;color:var(--steel);line-height:1.5;flex-grow:1;}
+.card .foot{display:flex;align-items:baseline;justify-content:space-between;margin-top:14px;}
+.card .foot.col{flex-direction:column;align-items:flex-start;gap:10px;}
+.price{font-size:16px;font-weight:600;color:var(--ink);}
+.price small{color:var(--steel);font-size:12px;font-weight:400;}
+.price .from{color:var(--steel);font-size:12px;font-weight:400;}
+.req-btn{font-family:"IBM Plex Mono",monospace;font-size:12px;background:var(--signal);color:#fff;border:none;padding:9px 14px;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block;}
+.req-btn:hover{background:var(--signal-d);}
+.more{color:var(--signal);font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;}
+.shift-note{font-size:11px;color:var(--peri);margin-top:5px;}
+.mat{font-size:11px;color:var(--steel);margin-top:6px;}
+.mat span{background:var(--paper-2);padding:2px 7px;border-radius:4px;margin-right:4px;display:inline-block;margin-top:3px;}
+.note{font-size:11px;color:#B4B2A9;text-align:center;margin-top:22px;}
+
+/* ---------- footer ---------- */
+.ftr{background:var(--ink);color:var(--steel-l);padding:44px 0 24px;margin-top:0;}
+.ftr-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px;padding-bottom:28px;border-bottom:1px solid rgba(250,250,248,0.12);}
+.ftr h5{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--line);margin:0 0 12px;}
+.ftr p{font-size:14px;line-height:1.6;margin:0 0 8px;}
+.ftr a{color:var(--steel-l);text-decoration:none;font-size:14px;display:block;padding:4px 0;}
+.ftr a:hover{color:var(--line);}
+.ftr-bot{padding-top:20px;font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+@media(max-width:640px){
+  .dirs{grid-template-columns:1fr;}
+  .mega-in{grid-template-columns:1fr;}
+  .stats{flex-wrap:wrap;}
+  .stat{flex:1 1 50%;border-bottom:1px solid rgba(250,250,248,0.1);}
+  .ftr-grid{grid-template-columns:1fr;gap:24px;}
+}
+
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <div class="hdr-left">
+      <button class="burger" id="burger" aria-label="Открыть меню">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Каталог
+      </button>
+      <a class="logo" href="index.html">
+        <span style="display:inline-flex;gap:2px;"><i style="width:4px;height:22px;background:#8FA0C9;display:inline-block;transform:skewX(-16deg);"></i><i style="width:4px;height:22px;background:#C2825A;display:inline-block;transform:skewX(-16deg);"></i><i style="width:4px;height:22px;background:#76746E;display:inline-block;transform:skewX(-16deg);"></i></span>
+        <span class="logo-word">LTICO</span>
+      </a>
+    </div>
+    <a class="hdr-phone" href="tel:+74997146692">+7 (499) 714-66-92</a>
+  </div>
+  <nav class="mega" id="mega" aria-label="Каталог">
+    <div class="mega-in">
+      <div class="mega-col">
+        <div class="cap" style="color:var(--peri)"><span>●</span> Логистика</div>
+        <div id="menu-logistics"></div>
+      </div>
+      <div class="mega-col">
+        <div class="cap" style="color:var(--signal)"><span>●</span> Спецтехника</div>
+        <div id="menu-special"></div>
+      </div>
+      <div class="mega-links">
+        <a href="index.html#o-kompanii">О компании</a>
+        <a href="catalog.html">Весь каталог</a>
+        <a href="kontakty.html">Контакты</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<section class="intro" id="o-kompanii">
+  <div class="wrap">
+    <div class="eyebrow">— О компании</div>
+    <h1>Логистика и строительная техника — под ключ</h1>
+    <p class="lead">Два направления в одной компании: перевозим грузы по России и СНГ и предоставляем спецтехнику в аренду с оператором. Берём задачи, от которых отказываются другие.</p>
+    <div class="stats">
+      <div class="stat"><b>~10 лет</b><span>опыт команды</span></div>
+      <div class="stat"><b>до 200 т</b><span>грузоподъёмность</span></div>
+      <div class="stat"><b>3</b><span>страны работы</span></div>
+      <div class="stat"><b>24/7</b><span>приём заявок</span></div>
+    </div>
+    <div class="dirs">
+      <a class="dir" href="catalog.html?dir=logistics">
+        <div class="dh">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" stroke="#8FA0C9" stroke-width="1.6"/><circle cx="7" cy="17" r="1.6" stroke="#8FA0C9" stroke-width="1.6"/><circle cx="17" cy="17" r="1.6" stroke="#8FA0C9" stroke-width="1.6"/></svg>
+          <b>Логистика</b>
+        </div>
+        <p>Газели, 5-тонники, фуры, тралы, негабарит. Доставка по РФ, Казахстану, Беларуси.</p>
+        <div class="go">Смотреть транспорт →</div>
+      </a>
+      <a class="dir special" href="catalog.html?dir=special">
+        <div class="dh">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 18v-4l4-1 2-4h3l2 3 3 1v5z" stroke="#C2825A" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8" cy="18" r="1.6" stroke="#C2825A" stroke-width="1.6"/><circle cx="17" cy="18" r="1.6" stroke="#C2825A" stroke-width="1.6"/></svg>
+          <b>Строительная техника</b>
+        </div>
+        <p>Экскаваторы, краны, автовышки, самосвалы, дорожно-коммунальная техника — в аренду с оператором.</p>
+        <div class="go">Смотреть каталог →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cat">
+  <div class="wrap">
+    <h2>Каталог техники</h2>
+    <div class="sub">Логистика — цена по запросу. Спецтехника — от указанной суммы, зависит от объёма и сложности задачи.</div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+    <div class="note">Фото — заглушки. Иконки заменим на реальные снимки техники. Цены демонстрационные, уточняются по заявке.</div>
+  </div>
+</section>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div>
+        <h5>LTICO</h5>
+        <p>ООО «Логистика транспортных инноваций»<br>ИНН 9729375445 · ОГРН 1247700340293</p>
+        <p>117041, Москва, ул. Адмирала Руднева, д. 4, помещ. 30Н/6</p>
+      </div>
+      <div>
+        <h5>Направления</h5>
+        <a href="catalog.html?dir=logistics">Логистика</a>
+        <a href="catalog.html?dir=special">Строительная техника</a>
+        <a href="catalog.html">Весь каталог</a>
+      </div>
+      <div>
+        <h5>Связаться</h5>
+        <a href="tel:+74997146692">+7 (499) 714-66-92</a>
+        <a href="tel:+79918540125">+7 (991) 854-01-25</a>
+        <a href="mailto:info@ltico.ru">info@ltico.ru</a>
+        <a href="https://wa.me/79918540125" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+    <div class="ftr-bot">
+      <span>© 2026 LTICO — Логистика транспортных инноваций</span>
+      <span>Черновая версия · в разработке</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================================
+   catalog.js — БАЗА ТЕХНИКИ LTICO
+   --------------------------------------------------------------------------
+   Это единственный файл, который нужно править, чтобы добавить/изменить технику.
+   Вёрстку трогать НЕ нужно — карточки и страницы строятся из этого списка сами.
+
+   КАК ДОБАВИТЬ ТЕХНИКУ:
+   Скопируйте любой блок { ... } целиком, вставьте рядом и поменяйте значения.
+   Не забудьте запятую после закрывающей } перед следующим блоком.
+
+   ПОЛЯ КАЖДОЙ ЕДИНИЦЫ:
+   - id        — короткий латинский идентификатор без пробелов (для адреса страницы)
+   - direction — направление: "logistics" (Логистика) или "special" (Спецтехника)
+   - category  — категория (должна совпадать с одной из categories ниже)
+   - name      — название, которое видит клиент
+   - specs     — короткие характеристики для карточки (через " · ")
+   - description — краткое описание для подробной страницы
+   - price     — цена: см. три типа ниже
+   - image     — путь к фото (пока оставляем "", будет иконка-заглушка)
+
+   ТРИ ТИПА ЦЕНЫ (поле price):
+   1) { type: "request" }
+        → показывает кнопку «Узнать цену» (для логистики).
+
+   2) { type: "shift", from: 12000, unit: "смена" }
+        → показывает «от 12 000 ₽ / смена». Стандарт смены 7+1
+          (7 часов работы + 1 час доставки) выводится автоматически.
+        unit может быть "смена" или "час".
+
+   3) { type: "trip", from: 900, unit: "м³",
+        materials: ["грунт", "строительный мусор", "строительный бой"] }
+        → показывает «от 900 ₽ / м³» и список материалов (для самосвалов).
+        unit может быть "м³" или "рейс".
+   ========================================================================== */
+
+const CATEGORIES = [
+  { id: "logistics-transport", direction: "logistics", label: "Логистика" },
+  { id: "road-building",       direction: "special",   label: "Дорожно-строительная техника" },
+  { id: "lifting",             direction: "special",   label: "Грузоподъёмная техника" },
+  { id: "dump-trucks",         direction: "special",   label: "Самосвалы" },
+  { id: "road-municipal",      direction: "special",   label: "Дорожно-коммунальная техника" }
+];
+
+const EQUIPMENT = [
+
+  /* ---------- ЛОГИСТИКА (цена по запросу) ---------- */
+  {
+    id: "gazelle",
+    direction: "logistics",
+    category: "logistics-transport",
+    name: "Газель",
+    specs: "до 1,5 т · тент / борт · город и межгород",
+    description: "Лёгкие грузоперевозки по городу и области. Подходит для небольших партий, переездов, доставки материалов.",
+    price: { type: "request" },
+    image: ""
+  },
+  {
+    id: "truck-5t",
+    direction: "logistics",
+    category: "logistics-transport",
+    name: "5-тонник",
+    specs: "до 5 т · тент / изотерма · РФ и СНГ",
+    description: "Среднетоннажные перевозки по России и странам СНГ. Оптимально для средних партий груза.",
+    price: { type: "request" },
+    image: ""
+  },
+  {
+    id: "semi-truck",
+    direction: "logistics",
+    category: "logistics-transport",
+    name: "Фура",
+    specs: "до 20 т · 82–92 м³ · РФ, Казахстан, Беларусь",
+    description: "Магистральные перевозки полными и сборными грузами. Тент, изотерма, рефрижератор — под тип груза.",
+    price: { type: "request" },
+    image: ""
+  },
+  {
+    id: "lowboy",
+    direction: "logistics",
+    category: "logistics-transport",
+    name: "Трал / негабарит",
+    specs: "низкорамная платформа · спецтехника · негабарит",
+    description: "Перевозка тяжёлой техники и негабаритных грузов с разработкой маршрута и оформлением допусков.",
+    price: { type: "request" },
+    image: ""
+  },
+
+  /* ---------- ДОРОЖНО-СТРОИТЕЛЬНАЯ (цена за смену) ---------- */
+  {
+    id: "excavator-crawler-22t",
+    direction: "special",
+    category: "road-building",
+    name: "Гусеничный экскаватор",
+    specs: "ковш 1,2 м³ · до 22 т · глубина копания 6,5 м",
+    description: "Гусеничный экскаватор для земляных работ, разработки котлованов и траншей на объектах любой сложности.",
+    price: { type: "shift", from: 12000, unit: "смена" },
+    image: ""
+  },
+  {
+    id: "excavator-loader",
+    direction: "special",
+    category: "road-building",
+    name: "Экскаватор-погрузчик",
+    specs: "ковш 1,0 м³ · глубина 4,5 м · универсал",
+    description: "Универсальная машина: копает и грузит. Подходит для небольших объёмов и стеснённых условий.",
+    price: { type: "shift", from: 9000, unit: "смена" },
+    image: ""
+  },
+
+  /* ---------- ГРУЗОПОДЪЁМНАЯ (цена за смену) ---------- */
+  {
+    id: "crane-50t",
+    direction: "special",
+    category: "lifting",
+    name: "Автокран 50 т",
+    specs: "стрела 40 м · вылет 34 м · г/п 50 т",
+    description: "Автокран для монтажных и погрузочных работ. Подъём тяжёлых конструкций на высоту и вылет.",
+    price: { type: "shift", from: 18000, unit: "смена" },
+    image: ""
+  },
+  {
+    id: "aerial-45m",
+    direction: "special",
+    category: "lifting",
+    name: "Автовышка 45 м",
+    specs: "высота 45 м · вылет 22 м · корзина 300 кг",
+    description: "Автогидроподъёмник для высотных работ: монтаж, обслуживание фасадов, освещения, рекламы.",
+    price: { type: "shift", from: 14000, unit: "смена" },
+    image: ""
+  },
+  {
+    id: "manipulator-10t",
+    direction: "special",
+    category: "lifting",
+    name: "Манипулятор 10 т",
+    specs: "борт 10 т · КМУ 7 т · вылет стрелы 20 м",
+    description: "Бортовой автомобиль с краном-манипулятором: перевозит и сам грузит/разгружает.",
+    price: { type: "shift", from: 11000, unit: "смена" },
+    image: ""
+  },
+
+  /* ---------- САМОСВАЛЫ (цена за рейс / м³) ---------- */
+  {
+    id: "dump-truck-20t",
+    direction: "special",
+    category: "dump-trucks",
+    name: "Самосвал 20 т",
+    specs: "кузов 12 м³ · до 20 т · вывоз и доставка",
+    description: "Вывоз грунта и строительного мусора, доставка сыпучих материалов. Расчёт за рейс или кубометр.",
+    price: { type: "trip", from: 900, unit: "м³", materials: ["грунт", "строительный мусор", "строительный бой"] },
+    image: ""
+  },
+
+  /* ---------- ДОРОЖНО-КОММУНАЛЬНАЯ (цена за смену) ---------- */
+  {
+    id: "water-truck",
+    direction: "special",
+    category: "road-municipal",
+    name: "Поливомоечная машина",
+    specs: "цистерна 10 м³ · полив · мойка дорог",
+    description: "Полив и мойка дорожного покрытия, доставка технической воды, пылеподавление на объектах.",
+    price: { type: "shift", from: 10000, unit: "смена" },
+    image: ""
+  }
+
+];
+
+</script>
+<script>
+/* ==========================================================================
+   site.js — общая логика: бургер-меню и отрисовка каталога из catalog.js
+   Требует, чтобы catalog.js был подключён ДО этого файла.
+   ========================================================================== */
+
+/* иконка-заглушка по направлению (пока нет реальных фото) */
+function phIcon(dir){
+  const c = dir === "logistics" ? "#8FA0C9" : "#C2825A";
+  return dir === "logistics"
+    ? '<svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" stroke="'+c+'" stroke-width="1.4"/><circle cx="7" cy="17" r="1.4" stroke="'+c+'" stroke-width="1.4"/><circle cx="17" cy="17" r="1.4" stroke="'+c+'" stroke-width="1.4"/></svg>'
+    : '<svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M4 18v-4l4-1 2-4h3l2 3 3 1v5z" stroke="'+c+'" stroke-width="1.4" stroke-linejoin="round"/><circle cx="8" cy="18" r="1.4" stroke="'+c+'" stroke-width="1.4"/><circle cx="17" cy="18" r="1.4" stroke="'+c+'" stroke-width="1.4"/></svg>';
+}
+const fmtNum = n => n.toLocaleString("ru-RU");
+
+/* блок цены по типу */
+function priceBlock(p){
+  if(p.type === "request"){
+    return '<a class="req-btn" href="kontakty.html#form">Узнать цену</a>';
+  }
+  if(p.type === "shift"){
+    return '<div><span class="price"><span class="from">от</span> '+fmtNum(p.from)+' ₽<small>/'+p.unit+'</small></span>'+
+           '<div class="shift-note">смена 7+1 (7 ч работы + 1 ч доставка)</div></div>';
+  }
+  if(p.type === "trip"){
+    const mats = p.materials ? '<div class="mat">'+p.materials.map(m=>'<span>'+m+'</span>').join('')+'</div>' : '';
+    return '<div><span class="price"><span class="from">от</span> '+fmtNum(p.from)+' ₽<small>/'+p.unit+'</small></span>'+mats+'</div>';
+  }
+  return '';
+}
+
+let activeCat = "all";
+
+function renderGrid(){
+  const grid = document.getElementById("grid");
+  if(!grid) return;
+  const items = EQUIPMENT.filter(e =>
+    activeCat === "all" ? true :
+    activeCat.startsWith("dir:") ? e.direction === activeCat.slice(4) :
+    e.category === activeCat
+  );
+  grid.innerHTML = items.map(e => {
+    const cat = CATEGORIES.find(c => c.id === e.category);
+    const isReq = e.price.type === "request";
+    const img = e.image ? '<img src="'+e.image+'" alt="'+e.name+'">' : phIcon(e.direction);
+    return '<div class="card"><div class="ph">'+img+'</div><div class="bd">'+
+      '<div class="tag">'+cat.label+'</div>'+
+      '<h3>'+e.name+'</h3>'+
+      '<div class="sp">'+e.specs+'</div>'+
+      '<div class="foot'+(isReq?'':' col')+'">'+
+        priceBlock(e.price)+
+        (isReq ? '' : '<a class="more" href="kontakty.html#form">Оставить заявку →</a>')+
+      '</div></div></div>';
+  }).join('');
+}
+
+function buildFilters(){
+  const f = document.getElementById("filters");
+  if(!f) return;
+  let html = '<button class="on" data-c="all">Все</button>';
+  html += '<button data-c="dir:logistics">Логистика</button>';
+  CATEGORIES.filter(c => c.direction === "special").forEach(c => {
+    html += '<button data-c="'+c.id+'">'+c.label+'</button>';
+  });
+  f.innerHTML = html;
+  f.querySelectorAll("button").forEach(b => {
+    b.addEventListener("click", () => setCat(b.dataset.c));
+  });
+}
+function setCat(c){
+  activeCat = c;
+  document.querySelectorAll("#filters button").forEach(b =>
+    b.classList.toggle("on", b.dataset.c === c));
+  renderGrid();
+}
+
+/* бургер-меню */
+function initBurger(){
+  const burger = document.getElementById("burger");
+  const mega = document.getElementById("mega");
+  if(burger && mega){
+    burger.addEventListener("click", () => mega.classList.toggle("open"));
+  }
+  const log = document.getElementById("menu-logistics");
+  const sp = document.getElementById("menu-special");
+  if(log) log.innerHTML = '<a href="catalog.html?dir=logistics">Все виды транспорта</a>';
+  if(sp){
+    CATEGORIES.filter(c => c.direction === "special").forEach(c => {
+      sp.innerHTML += '<a href="catalog.html?cat='+c.id+'">'+c.label+'</a>';
+    });
+  }
+}
+
+/* применить фильтр из адреса (?dir= или ?cat=) при заходе на catalog.html */
+function applyUrlFilter(){
+  const params = new URLSearchParams(location.search);
+  if(params.get("dir")) activeCat = "dir:" + params.get("dir");
+  else if(params.get("cat")) activeCat = params.get("cat");
+  if(activeCat !== "all"){
+    document.querySelectorAll("#filters button").forEach(b =>
+      b.classList.toggle("on", b.dataset.c === activeCat));
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initBurger();
+  buildFilters();
+  applyUrlFilter();
+  renderGrid();
+});
+
+</script>
+</body>
+</html>
