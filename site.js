@@ -1,7 +1,16 @@
 /* ==========================================================================
-   site.js — общая логика: бургер-меню и отрисовка каталога из catalog.js
-   Требует, чтобы catalog.js был подключён ДО этого файла.
+   site.js — общая логика: бургер-меню, галерея и отрисовка каталога
+   Требует, чтобы catalog.js (и, если есть галерея, gallery.js) были
+   подключены ДО этого файла.
+
+   Страница каталога сообщает своё направление через
+   <body data-direction="logistics"> или <body data-direction="special">.
+   Без этого атрибута сетка/фильтры каталога просто не рендерятся —
+   так безопасно подключать site.js на страницах без каталога (главная).
    ========================================================================== */
+
+let pageDirection = null;
+let activeCat = "all";
 
 /* иконка-заглушка по направлению (пока нет реальных фото) */
 function phIcon(dir){
@@ -28,16 +37,17 @@ function priceBlock(p){
   return '';
 }
 
-let activeCat = "all";
+/* техника текущей страницы: только её направление + активный фильтр категории */
+function itemsForPage(){
+  if(!pageDirection || typeof EQUIPMENT === "undefined") return [];
+  return EQUIPMENT.filter(e => e.direction === pageDirection &&
+    (activeCat === "all" || e.category === activeCat));
+}
 
 function renderGrid(){
   const grid = document.getElementById("grid");
   if(!grid) return;
-  const items = EQUIPMENT.filter(e =>
-    activeCat === "all" ? true :
-    activeCat.startsWith("dir:") ? e.direction === activeCat.slice(4) :
-    e.category === activeCat
-  );
+  const items = itemsForPage();
   grid.innerHTML = items.map(e => {
     const cat = CATEGORIES.find(c => c.id === e.category);
     const isReq = e.price.type === "request";
@@ -53,12 +63,12 @@ function renderGrid(){
   }).join('');
 }
 
+/* фильтры категорий — только категории текущего направления страницы */
 function buildFilters(){
   const f = document.getElementById("filters");
-  if(!f) return;
+  if(!f || !pageDirection) return;
   let html = '<button class="on" data-c="all">Все</button>';
-  html += '<button data-c="dir:logistics">Логистика</button>';
-  CATEGORIES.filter(c => c.direction === "special").forEach(c => {
+  CATEGORIES.filter(c => c.direction === pageDirection).forEach(c => {
     html += '<button data-c="'+c.id+'">'+c.label+'</button>';
   });
   f.innerHTML = html;
@@ -73,6 +83,16 @@ function setCat(c){
   renderGrid();
 }
 
+/* применить категорию из адреса (?cat=) при заходе по ссылке из мега-меню */
+function applyUrlFilter(){
+  const cat = new URLSearchParams(location.search).get("cat");
+  if(cat) activeCat = cat;
+  if(activeCat !== "all"){
+    document.querySelectorAll("#filters button").forEach(b =>
+      b.classList.toggle("on", b.dataset.c === activeCat));
+  }
+}
+
 /* бургер-меню */
 function initBurger(){
   const burger = document.getElementById("burger");
@@ -82,28 +102,38 @@ function initBurger(){
   }
   const log = document.getElementById("menu-logistics");
   const sp = document.getElementById("menu-special");
-  if(log) log.innerHTML = '<a href="catalog.html?dir=logistics">Все виды транспорта</a>';
+  if(typeof CATEGORIES === "undefined") return;
+  if(log) log.innerHTML = '<a href="logistika.html">Все виды транспорта</a>';
   if(sp){
     CATEGORIES.filter(c => c.direction === "special").forEach(c => {
-      sp.innerHTML += '<a href="catalog.html?cat='+c.id+'">'+c.label+'</a>';
+      sp.innerHTML += '<a href="stroytehnika.html?cat='+c.id+'">'+c.label+'</a>';
     });
   }
 }
 
-/* применить фильтр из адреса (?dir= или ?cat=) при заходе на catalog.html */
-function applyUrlFilter(){
-  const params = new URLSearchParams(location.search);
-  if(params.get("dir")) activeCat = "dir:" + params.get("dir");
-  else if(params.get("cat")) activeCat = params.get("cat");
-  if(activeCat !== "all"){
-    document.querySelectorAll("#filters button").forEach(b =>
-      b.classList.toggle("on", b.dataset.c === activeCat));
-  }
+/* горизонтальная фото-лента "Знакомство с компанией" */
+function initGallery(){
+  const track = document.getElementById("gallery-track");
+  if(!track || typeof GALLERY === "undefined") return;
+  track.innerHTML = GALLERY.map(p =>
+    '<div class="gs-item">'+
+      (p.src
+        ? '<img src="'+p.src+'" alt="'+p.caption+'">'
+        : '<div class="gs-ph">'+p.caption+'</div>')+
+    '</div>'
+  ).join('');
+  const prev = document.getElementById("gallery-prev");
+  const next = document.getElementById("gallery-next");
+  const step = () => track.clientWidth * 0.8;
+  if(prev) prev.addEventListener("click", () => track.scrollBy({left:-step(), behavior:"smooth"}));
+  if(next) next.addEventListener("click", () => track.scrollBy({left:step(), behavior:"smooth"}));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  pageDirection = document.body.dataset.direction || null;
   initBurger();
   buildFilters();
   applyUrlFilter();
   renderGrid();
+  initGallery();
 });

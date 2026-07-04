@@ -36,7 +36,8 @@
         <div id="menu-special"></div>
       </div>
       <div class="mega-links">
-        <a href="catalog.html">Весь каталог</a>
+        <a href="logistika.html">Логистика</a>
+        <a href="stroytehnika.html">Строительная техника</a>
         <a href="kontakty.html">Контакты</a>
       </div>
     </div>
@@ -55,7 +56,7 @@
     </div>
   </div>
   <div class="dirs">
-    <a class="dir" href="catalog.html?dir=logistics">
+    <a class="dir" href="logistika.html">
       <div class="dh">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" stroke="#8FA0C9" stroke-width="1.6"/><circle cx="7" cy="17" r="1.6" stroke="#8FA0C9" stroke-width="1.6"/><circle cx="17" cy="17" r="1.6" stroke="#8FA0C9" stroke-width="1.6"/></svg>
         <b>Логистика</b>
@@ -63,7 +64,7 @@
       <p>Газели, 5-тонники, фуры, тралы, негабарит. Доставка по РФ, Казахстану, Беларуси.</p>
       <div class="go">Смотреть транспорт →</div>
     </a>
-    <a class="dir special" href="catalog.html?dir=special">
+    <a class="dir special" href="stroytehnika.html">
       <div class="dh">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 18v-4l4-1 2-4h3l2 3 3 1v5z" stroke="#C2825A" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8" cy="18" r="1.6" stroke="#C2825A" stroke-width="1.6"/><circle cx="17" cy="18" r="1.6" stroke="#C2825A" stroke-width="1.6"/></svg>
         <b>Строительная техника</b>
@@ -74,13 +75,15 @@
   </div>
 </section>
 
-<section class="cat">
+<section class="gallery">
   <div class="wrap">
-    <h2>Каталог техники</h2>
-    <div class="sub">Логистика — цена по запросу. Спецтехника — от указанной суммы, зависит от объёма и сложности задачи.</div>
-    <div class="filters" id="filters"></div>
-    <div class="grid" id="grid"></div>
-    <div class="note">Фото — заглушки. Иконки заменим на реальные снимки техники. Цены демонстрационные, уточняются по заявке.</div>
+    <h2>Знакомство с компанией</h2>
+    <div class="sub">Наша работа и техника — в фотографиях.</div>
+    <div class="gs-wrap">
+      <button class="gs-nav prev" id="gallery-prev" aria-label="Предыдущее фото">‹</button>
+      <div class="gs-track" id="gallery-track"></div>
+      <button class="gs-nav next" id="gallery-next" aria-label="Следующее фото">›</button>
+    </div>
   </div>
 </section>
 
@@ -94,9 +97,8 @@
       </div>
       <div>
         <h5>Направления</h5>
-        <a href="catalog.html?dir=logistics">Логистика</a>
-        <a href="catalog.html?dir=special">Строительная техника</a>
-        <a href="catalog.html">Весь каталог</a>
+        <a href="logistika.html">Логистика</a>
+        <a href="stroytehnika.html">Строительная техника</a>
       </div>
       <div>
         <h5>Связаться</h5>
@@ -114,6 +116,7 @@
 </footer>
 
 <script src="catalog.js"></script>
+<script src="gallery.js"></script>
 <script src="site.js"></script>
 </body>
 </html>
