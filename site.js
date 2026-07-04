@@ -22,9 +22,10 @@ function phIcon(dir){
 const fmtNum = n => n.toLocaleString("ru-RU");
 
 /* блок цены по типу */
-function priceBlock(p){
+function priceBlock(e){
+  const p = e.price;
   if(p.type === "request"){
-    return '<a class="req-btn" href="kontakty.html#form">Узнать цену</a>';
+    return '<button type="button" class="req-btn" data-modal-dir="'+e.direction+'" data-modal-name="'+e.name+'">Узнать цену</button>';
   }
   if(p.type === "shift"){
     return '<div><span class="price"><span class="from">от</span> '+fmtNum(p.from)+' ₽<small>/'+p.unit+'</small></span>'+
@@ -57,8 +58,8 @@ function renderGrid(){
       '<h3>'+e.name+'</h3>'+
       '<div class="sp">'+e.specs+'</div>'+
       '<div class="foot'+(isReq?'':' col')+'">'+
-        priceBlock(e.price)+
-        (isReq ? '' : '<a class="more" href="kontakty.html#form">Оставить заявку →</a>')+
+        priceBlock(e)+
+        (isReq ? '' : '<button type="button" class="more" data-modal-dir="'+e.direction+'" data-modal-name="'+e.name+'">Оставить заявку →</button>')+
       '</div></div></div>';
   }).join('');
 }
@@ -116,6 +117,65 @@ function initBurger(){
   }
 }
 
+/* поля модалки заявки, разные для логистики и спецтехники */
+const MODAL_FIELDS = {
+  logistics: [
+    { name: "route",  label: "Маршрут (откуда — куда)", placeholder: "Откуда — куда" },
+    { name: "weight", label: "Вес и габариты груза",     placeholder: "Например, 12 т / 14×3×3,5 м" }
+  ],
+  special: [
+    { name: "address",   label: "Адрес работы",       placeholder: "Город, объект" },
+    { name: "specifics", label: "Специфика работы",   placeholder: "Например, рытьё котлована" }
+  ]
+};
+
+/* модалка заявки: открывается по клику на кнопку карточки, поля зависят от направления */
+function openModal(direction, name){
+  const overlay = document.getElementById("modal-overlay");
+  if(!overlay) return;
+  const dirLabel = direction === "logistics" ? "Логистика" : "Спецтехника";
+  document.getElementById("modal-title").textContent = "Заявка на: " + name;
+  document.getElementById("modal-subject").value = "Заявка с сайта LTICO — " + dirLabel + " — " + name;
+
+  const extra = MODAL_FIELDS[direction] || [];
+  document.getElementById("modal-fields").innerHTML =
+    '<div class="field"><label for="modal-name">Имя</label>'+
+    '<input id="modal-name" name="name" type="text" placeholder="Как к вам обращаться" required></div>'+
+    '<div class="field"><label for="modal-phone">Телефон</label>'+
+    '<input id="modal-phone" name="phone" type="tel" placeholder="+7 ___ ___-__-__" required></div>'+
+    extra.map((f,i) => '<div class="field"><label for="modal-f'+i+'">'+f.label+'</label>'+
+      '<input id="modal-f'+i+'" name="'+f.name+'" type="text" placeholder="'+f.placeholder+'"></div>').join('')+
+    '<div class="field full"><label for="modal-message">Комментарий</label>'+
+    '<textarea id="modal-message" name="message" rows="4" placeholder="'+
+      (direction === "special" ? "Например: объём работ и задачи" : "Тип груза, сроки, особые условия")+
+    '"></textarea></div>';
+
+  overlay.hidden = false;
+  document.body.classList.add("modal-open");
+  requestAnimationFrame(() => overlay.classList.add("open"));
+  document.getElementById("modal-name").focus();
+}
+function closeModal(){
+  const overlay = document.getElementById("modal-overlay");
+  if(!overlay) return;
+  overlay.classList.remove("open");
+  document.body.classList.remove("modal-open");
+  overlay.hidden = true;
+}
+function initModal(){
+  const overlay = document.getElementById("modal-overlay");
+  if(!overlay) return;
+  document.getElementById("modal-close").addEventListener("click", closeModal);
+  overlay.addEventListener("click", e => { if(e.target === overlay) closeModal(); });
+  document.addEventListener("keydown", e => {
+    if(e.key === "Escape" && overlay.classList.contains("open")) closeModal();
+  });
+  document.addEventListener("click", e => {
+    const btn = e.target.closest("[data-modal-dir]");
+    if(btn) openModal(btn.dataset.modalDir, btn.dataset.modalName);
+  });
+}
+
 /* горизонтальная фото-лента "Знакомство с компанией" */
 function initGallery(){
   const track = document.getElementById("gallery-track");
@@ -141,4 +201,5 @@ document.addEventListener("DOMContentLoaded", () => {
   applyUrlFilter();
   renderGrid();
   initGallery();
+  initModal();
 });
