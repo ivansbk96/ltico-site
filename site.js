@@ -103,7 +103,12 @@ function initBurger(){
   const log = document.getElementById("menu-logistics");
   const sp = document.getElementById("menu-special");
   if(typeof CATEGORIES === "undefined") return;
-  if(log) log.innerHTML = '<a href="logistika.html">Все виды транспорта</a>';
+  if(log){
+    log.innerHTML = '<a href="logistika.html">Все</a>';
+    CATEGORIES.filter(c => c.direction === "logistics").forEach(c => {
+      log.innerHTML += '<a href="logistika.html?cat='+c.id+'">'+c.label+'</a>';
+    });
+  }
   if(sp){
     CATEGORIES.filter(c => c.direction === "special").forEach(c => {
       sp.innerHTML += '<a href="stroytehnika.html?cat='+c.id+'">'+c.label+'</a>';

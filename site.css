@@ -89,6 +89,42 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
 .mat span{background:var(--paper-2);padding:2px 7px;border-radius:4px;margin-right:4px;display:inline-block;margin-top:3px;}
 .note{font-size:11px;color:#B4B2A9;text-align:center;margin-top:22px;}
 
+/* ---------- почему LTICO ---------- */
+.why{padding:34px 0 54px;}
+.why h2{font-size:clamp(22px,3vw,30px);}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:22px;}
+.why-card{background:#fff;border:0.5px solid #E0DDD4;border-radius:12px;padding:20px;}
+.why-card .why-ic{margin-bottom:12px;display:block;}
+.why-card h3{font-size:16px;font-weight:700;font-family:"Inter",sans-serif;margin:0 0 8px;}
+.why-card p{font-size:13.5px;color:var(--steel);line-height:1.6;margin:0;}
+
+/* ---------- как мы работаем ---------- */
+.steps{padding:34px 0 54px;background:var(--paper-2);}
+.steps h2{font-size:clamp(22px,3vw,30px);}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;margin-top:22px;background:var(--rule);border-radius:12px;overflow:hidden;}
+.step{background:#fff;padding:22px 20px;}
+.step-n{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--signal);font-weight:600;}
+.step h3{font-size:16px;font-weight:700;font-family:"Inter",sans-serif;margin:10px 0 8px;}
+.step p{font-size:13.5px;color:var(--steel);line-height:1.6;margin:0;}
+
+/* ---------- география работы ---------- */
+.geo{padding:34px 0 54px;background:var(--blueprint);color:var(--line);}
+.geo h2{font-size:clamp(22px,3vw,30px);color:var(--line);}
+.geo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;margin-top:22px;background:rgba(250,250,248,0.12);}
+.geo-card{background:var(--ink-2);padding:22px;border-left:3px solid var(--peri);}
+.geo-card b{display:block;font-family:"Manrope",sans-serif;font-size:17px;font-weight:700;margin-bottom:8px;}
+.geo-card p{font-size:13.5px;color:var(--steel-l);line-height:1.6;margin:0;}
+
+/* ---------- финальный CTA ---------- */
+.cta-final{padding:44px 0;background:var(--ink);}
+.cta-final-in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.cta-final h2{color:var(--line);font-size:clamp(20px,2.6vw,28px);}
+.cta-final p{color:var(--steel-l);font-size:14px;margin-top:8px;max-width:44ch;}
+.cta-final-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.cta-btn{font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--signal);color:#fff;border:none;padding:13px 22px;border-radius:6px;text-decoration:none;white-space:nowrap;}
+.cta-btn:hover{background:var(--signal-d);}
+.cta-phone{color:var(--line);font-family:"IBM Plex Mono",monospace;font-size:15px;text-decoration:none;}
+
 /* ---------- фото-галерея "знакомство с компанией" ---------- */
 .gallery{padding:34px 0 54px;}
 .gallery h2{font-size:clamp(24px,3.4vw,32px);}
@@ -124,4 +160,5 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
   .stat{flex:1 1 50%;border-bottom:1px solid rgba(250,250,248,0.1);}
   .ftr-grid{grid-template-columns:1fr;gap:24px;}
   .gs-nav{display:none;}
+  .cta-final-in{flex-direction:column;align-items:flex-start;}
 }

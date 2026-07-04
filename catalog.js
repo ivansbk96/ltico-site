@@ -34,7 +34,11 @@
    ========================================================================== */
 
 const CATEGORIES = [
-  { id: "logistics-transport", direction: "logistics", label: "Логистика" },
+  { id: "gazelle-1-5t",         direction: "logistics", label: "Газели 1,5 т" },
+  { id: "delivery-5t",          direction: "logistics", label: "Перевозки 5 т" },
+  { id: "trucks-20t",           direction: "logistics", label: "Фуры 20 т" },
+  { id: "lowboy-standard",      direction: "logistics", label: "Трал (габарит)" },
+  { id: "lowboy-oversize",      direction: "logistics", label: "Тралы (негабарит)" },
   { id: "road-building",       direction: "special",   label: "Дорожно-строительная техника" },
   { id: "lifting",             direction: "special",   label: "Грузоподъёмная техника" },
   { id: "dump-trucks",         direction: "special",   label: "Самосвалы" },
@@ -47,7 +51,7 @@ const EQUIPMENT = [
   {
     id: "gazelle",
     direction: "logistics",
-    category: "logistics-transport",
+    category: "gazelle-1-5t",
     name: "Газель",
     specs: "до 1,5 т · тент / борт · город и межгород",
     description: "Лёгкие грузоперевозки по городу и области. Подходит для небольших партий, переездов, доставки материалов.",
@@ -57,7 +61,7 @@ const EQUIPMENT = [
   {
     id: "truck-5t",
     direction: "logistics",
-    category: "logistics-transport",
+    category: "delivery-5t",
     name: "5-тонник",
     specs: "до 5 т · тент / изотерма · РФ и СНГ",
     description: "Среднетоннажные перевозки по России и странам СНГ. Оптимально для средних партий груза.",
@@ -67,7 +71,7 @@ const EQUIPMENT = [
   {
     id: "semi-truck",
     direction: "logistics",
-    category: "logistics-transport",
+    category: "trucks-20t",
     name: "Фура",
     specs: "до 20 т · 82–92 м³ · РФ, Казахстан, Беларусь",
     description: "Магистральные перевозки полными и сборными грузами. Тент, изотерма, рефрижератор — под тип груза.",
@@ -75,12 +79,22 @@ const EQUIPMENT = [
     image: ""
   },
   {
-    id: "lowboy",
+    id: "trawl-standard",
     direction: "logistics",
-    category: "logistics-transport",
-    name: "Трал / негабарит",
-    specs: "низкорамная платформа · спецтехника · негабарит",
-    description: "Перевозка тяжёлой техники и негабаритных грузов с разработкой маршрута и оформлением допусков.",
+    category: "lowboy-standard",
+    name: "Трал (габарит)",
+    specs: "низкорамная платформа · перевозка техники · в пределах габарита",
+    description: "Перевозка спецтехники и колёсных/гусеничных машин в пределах допустимых габаритов, без специальных разрешений.",
+    price: { type: "request" },
+    image: ""
+  },
+  {
+    id: "trawl-oversize",
+    direction: "logistics",
+    category: "lowboy-oversize",
+    name: "Трал (негабарит)",
+    specs: "низкорамная платформа · спецтехника · сверхнормативный груз",
+    description: "Перевозка негабаритных грузов и тяжёлой техники с разработкой маршрута и оформлением специальных разрешений.",
     price: { type: "request" },
     image: ""
   },
